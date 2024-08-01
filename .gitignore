@@ -9,3 +9,8 @@ node_modules
 .dev.vars
 
 coverage
+# Sentry Config File
+.sentryclirc
+
+# Sentry Config File
+.env.sentry-build-plugin

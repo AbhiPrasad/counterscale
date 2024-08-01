@@ -69,6 +69,16 @@ To start tracking website traffic on your web property, copy/paste the following
 
 Be sure to replace `your-unique-site-id` with a unique string/slug representing your web property. Use a unique site ID for each property you place the tracking script on.
 
+## Sentry Support
+
+Counterscale supports error tracking and tracing via [Sentry](https://sentry.io). To enable Sentry, set the following environment variables:
+
+In your `.dev.vars` file set the `SENTRY_DSN` to be your Sentry project DSN. You can find this in your Sentry project settings. You'll also need to run `npx wrangler pages secret put SENTRY_DSN` to set this secret in your Cloudflare Pages project.
+
+In your `.env` file (you can run `cp .env.example .env` to create this file), set the `SENTRY_DSN` to be your Sentry project DSN. You can re-use the same DSN you used in `.dev.vars`.
+
+To get readable stacktraces for your errors, we recommend uploading sourcemaps to Sentry. To do this, set the `SENTRY_AUTH_TOKEN`, `SENTRY_ORG` and `SENTRY_PROJECT` environment variables in your `.env` file. You can generate a new auth token [here](https://sentry.io/settings/demo/auth-tokens/).
+
 ## Development
 
 ### Config

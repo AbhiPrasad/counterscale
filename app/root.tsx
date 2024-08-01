@@ -1,3 +1,4 @@
+import { captureRemixErrorBoundaryError, withSentry } from "@sentry/remix";
 import styles from "./globals.css?url";
 import {
     json,
@@ -88,7 +89,7 @@ export const Layout = ({ children = [] }: { children: React.ReactNode }) => {
     );
 };
 
-export default function App() {
+function App() {
     const data = useLoaderData<typeof loader>();
     return (
         <div>
@@ -146,8 +147,12 @@ export default function App() {
     );
 }
 
+export default withSentry(App, { wrapWithErrorBoundary: false });
+
 export const ErrorBoundary = () => {
     const error = useRouteError();
+
+    captureRemixErrorBoundaryError(error);
 
     if (isRouteErrorResponse(error)) {
         return (

@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import {
     vitePlugin as remix,
     cloudflareDevProxyVitePlugin as remixCloudflareDevProxy,
@@ -11,6 +12,7 @@ export default defineConfig({
     server: {
         port: 3005,
     },
+
     plugins: [
         remixCloudflareDevProxy({ getLoadContext }),
         !process.env.VITEST &&
@@ -24,15 +26,25 @@ export default defineConfig({
                 },
             }),
         tsconfigPaths(),
+        !process.env.VITEST &&
+            sentryVitePlugin({
+                disable: process.env.NODE_ENV === "development",
+            }),
     ],
+
     ssr: {
         resolve: {
             externalConditions: ["workerd", "worker"],
         },
     },
+
     test: {
         environment: "happy-dom",
         // Additionally, this is to load ".env.test" during vitest
         env: loadEnv("test", process.cwd(), ""),
+    },
+
+    build: {
+        sourcemap: true,
     },
 });

@@ -1,4 +1,12 @@
 # You also need to specify these as environment variables in 
 # your Cloudflare configuration
+
+# Your Cloudflare Cloudflare API token. This API tokens needs the `Account.Account Analytics` permission.
 CF_BEARER_TOKEN=''
+
+# Your Cloudflare account ID. This can be found in the Cloudflare dashboard.
 CF_ACCOUNT_ID=''
+
+# Optionally specify a Sentry DSN to enable error tracking and tracing for
+# your server-side code.
+SENTRY_DSN=''
